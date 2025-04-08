@@ -34,16 +34,16 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
 
 ## 1. Prerun.ipynb
 
-> **Description**  
 > This notebook is where the pipeline begins. It creates a position-specific scoring matrix (PSSM) from user-provided input SLiMs and searches the proteome to find candidate sequences. Key filters (IUPRED, ANCHOR, PSIPRED, etc.) are applied to reduce false positives, and each hit is paired with the user’s chosen “bait” (e.g., human actin). Multiple sequence alignments (MSAs) are then generated in parallel and reformatted for downstream structure prediction.
 
 <details>
   <summary>Details in <code>1.Prerun.ipynb</code></summary>
 
-1. **Folder Setup**  
+1. **Folder and pathway setup**  
    - Please define the paths iupred_path, psipred_path, NCBI_protein_database, uniref90_path, reformat_path and your bait_sequence. 
    - Automatically creates a consistent project folder structure.  
    - Requires the user’s environment to be active (e.g. `conda activate SLiM_AF2_screen`).
+   - Move your inital aligment to the **Input Folder** and rename it to **input.fasta** (example is uploaded in this github repository). 
 
 3. **PSSM Generation**  
    - Uses user-provided SLiMs (aligned FASTA) and a chosen substitution matrix (BLOSUM62 or PAM30).  
