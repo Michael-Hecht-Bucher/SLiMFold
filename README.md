@@ -55,7 +55,20 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
    - (C) Removes identical sequences found to avoid running them through jackhmmer and colabfold multiple times.
    - (Optional, if not first iteration) Compare the PSSM-hits of two iterations and write the unique hits to a new FASTA file. Please ignore this cell in case you are running the first iteration.
 
-5. **Multiple Sequence Alignments**  
+4. **Bait Fusion and Prey-Bait Preparation**
+   - The predefined bait sequence is appended to each unique hit, separated by a colon (> header as peptide:bait).
+
+5. **Split Prey-Bait pairs into individual FASTA files for ColabFold input** 
+
+6. **Multiple Sequence Alignment for Bait** 
+   - Runs jackhmmer for the bait sequence, with modified filters, against the UniRef90 database to identify homologs and generate a .sto alignment file.
+
+7. **Multiple Sequence Alignment for Peptides** 
+   - Runs jackhmmer for each peptide, with modified filters, against the UniRef90 database to identify homologs and generate a .sto alignment file.
+   - Uses parallel processing to speed up computation — both the number of CPU cores per search and the number of parallel processes can be adjusted by the user.
+   - Automatically tracks remaining peptides, so the run can resume from where it left off using the *input_remaining.fasta* file in case of interruption.
+
+6. **Multiple Sequence Alignments**  
    - jackhmmer-based MSA generation (with the UniRef90 database) for each hit and for the bait.  
    - Alignments are converted to A3M format (via `reformat.pl` in HH-suite), then sorted and stored.
 
