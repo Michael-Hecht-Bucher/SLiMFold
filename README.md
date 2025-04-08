@@ -36,7 +36,7 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
 
 ## 1. Prerun.ipynb
 
-> This notebook is where the pipeline begins. It creates a position-specific scoring matrix (PSSM) from user-provided input SLiMs and searches the proteome to find candidate sequences. Key filters (IUPRED, ANCHOR, PSIPRED, etc.) are applied to reduce false positives, and each hit is paired with the user’s chosen “bait” (e.g., human actin). Multiple sequence alignments (MSAs) are then generated in parallel and reformatted for downstream structure prediction.
+> This notebook is where the pipeline begins. It creates a position-specific scoring matrix (PSSM) from user-provided input SLiMs and searches the proteome to find candidate sequences. Key filters (PSSM score, IUPRED, ANCHOR and PSIPRED) are applied to reduce false positives, and each hit is paired with the user’s chosen “bait” (e.g., human actin). Multiple sequence alignments (MSAs) are then generated in parallel and reformatted for downstream structure prediction.
 
 <details>
   <summary>Details</summary>
