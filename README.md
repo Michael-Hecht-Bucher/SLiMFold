@@ -68,9 +68,17 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
    - Uses parallel processing to speed up computation — both the number of CPU cores per search and the number of parallel processes can be adjusted by the user.
    - Automatically tracks remaining peptides, so the run can resume from where it left off using the *input_remaining.fasta* file in case of interruption.
 
-6. **Multiple Sequence Alignments**  
-   - jackhmmer-based MSA generation (with the UniRef90 database) for each hit and for the bait.  
-   - Alignments are converted to A3M format (via `reformat.pl` in HH-suite), then sorted and stored.
+8. **Converts the .sto to .a3m** 
+
+9. **Sort and Deduplicate .a3m Files Based on Sequence Identity**
+   - Sorts all .a3m files by global sequence identity to the reference (first) sequence, placing the most similar sequences at the top to improve MSA quality for structure prediction.
+   - For the bait MSA (bait_sequence.a3m), the user is prompted whether they want to sort it.
+   - Deduplicates the bait .a3m file (based on exact sequence match) to remove redundant homologs, ensuring higher sequence diversity and enhancing co-evolutionary signal strength for better complex prediction accuracy.
+
+10. **Trims the MSA**
+    - Reduces the size of each .a3m file by keeping only the first N sequences (default: 2048).
+
+11. **Combines Bait and Prey MSAs for ColabFoldA**
 
 </details>
 
