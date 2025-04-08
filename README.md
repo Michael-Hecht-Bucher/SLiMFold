@@ -43,16 +43,17 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
    - Please define the paths iupred_path, psipred_path, NCBI_protein_database, uniref90_path, reformat_path and your bait_sequence. 
    - Automatically creates a consistent project folder structure.  
    - Requires the user’s environment to be active (e.g. `conda activate SLiM_AF2_screen`).
-   - Move your inital aligment to the **Input Folder** and rename it to **input.fasta** (example is uploaded in this github repository). 
+   - Move your inital aligment to the **Input Folder** and rename it to **input.fasta** (see example folder). 
 
-3. **PSSM Generation**  
-   - Uses user-provided SLiMs (aligned FASTA) and a chosen substitution matrix (BLOSUM62 or PAM30).  
-   - Produces a PSSM cutoff (default for BLOSUM62 is 10; for PAM30 is 0).
+2. **PSSM Generation with BLOSUM62**  
+   - Uses user-provided SLiMs (aligned FASTA in input.fasta) and the BLOSUM62 substitution matrix.  
+   - Produces a PSSM cutoff (default for BLOSUM62 is set to 10).
 
-4. **Proteome Search**  
-   - Scores the human proteome (or your organism of choice) using the PSSM.  
-   - Retains only hits meeting specified cutoffs for IUPRED, ANCHOR, PSIPRED, etc.  
-   - Extends each hit by ±20 residues to capture potential context.
+3. **Proteome Search**  
+   - (A) Prompts the user first to define the probable secondary structure involved in the interaction. User can choose bewtween 'helix', 'strand', 'coil' or 'unknown'. 
+   - (B) Then scores the human proteome (or your organism of choice) using the PSSM, as well as IUPRED, ANCHOR, PSIPRED. Retains only hits meeting specified cutoffs for PSSM, IUPRED, ANCHOR, PSIPRED, etc. Extends each hit by ±20 residues to capture potential context.
+   - (C) Removes identical sequences found to avoid running them through jackhmmer and colabfold multiple times.
+   - (Optional, if not first iteration) Compare the PSSM-hits of two iterations and write the unique hits to a new FASTA file. Please ignore this cell in case you are running the first iteration.
 
 5. **Multiple Sequence Alignments**  
    - jackhmmer-based MSA generation (with the UniRef90 database) for each hit and for the bait.  
