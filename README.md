@@ -3,6 +3,8 @@
 
 The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, filter, and predict short linear motifs (SLiMs), based on an initial sequence alignment. The pipeline was run in three main steps: **Prerun**, **ColabFold_looped**, and **Postanalysis**.
 
+![Alt text](images/Pipeline.png)
+
 ---
 
 ## Installation & Environment
