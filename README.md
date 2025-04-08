@@ -39,7 +39,7 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
 > This notebook is where the pipeline begins. It creates a position-specific scoring matrix (PSSM) from user-provided input SLiMs and searches the proteome to find candidate sequences. Key filters (IUPRED, ANCHOR, PSIPRED, etc.) are applied to reduce false positives, and each hit is paired with the user’s chosen “bait” (e.g., human actin). Multiple sequence alignments (MSAs) are then generated in parallel and reformatted for downstream structure prediction.
 
 <details>
-  <summary>Details in <code>1.Prerun.ipynb</code></summary>
+  <summary>Details</summary>
 
 1. **Folder and pathway setup**  
    - Please define the paths iupred_path, psipred_path, NCBI_protein_database, uniref90_path, reformat_path and your bait_sequence. 
@@ -95,7 +95,7 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
 > 3. Integrating multiple sequences (SLiM + bait) for AlphaFold2 Multimer predictions.
 
 <details>
-  <summary>Key Steps in <code>ColabFold_looped.ipynb</code></summary>
+  <summary>Details</summary>
 
 1. **Batch Processing & Automation**  
    - Scans a given folder (e.g., in Google Drive) for all `.fasta` files.  
@@ -123,7 +123,7 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
 > Once you have raw predictions from **ColabFold_looped**, the **Postanalysis** stage aggregates, filters, and clusters candidate structures to identify meaningful F-actin-binding SLiMs. This notebook helps evaluate each predicted motif’s structural reliability and organizes results for detailed inspection and downstream analyses (e.g., functional enrichment).
 
 <details>
-  <summary>Key Steps in <code>Postanalysis.ipynb</code></summary>
+  <summary>Details</summary>
 
 1. **Loading & Filtering Models**  
    - Reads all predicted structures and extracts:  
