@@ -88,7 +88,6 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
 
 ## 2. ColabFold_looped.ipynb
 
-> **Description**  
 > This notebook is a **modified version** of the [ColabFold batch pipeline](https://github.com/sokrypton/ColabFold) originally developed by the Steinegger lab. In our pipeline, **ColabFold_looped.ipynb** automates structure predictions of candidate motif–bait pairs (e.g., SLiM–actin) by:
 >
 > 1. Accepting custom MSAs from the `Prerun` stage.  
@@ -121,7 +120,6 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
 
 ## 3. Postanalysis.ipynb
 
-> **Description**  
 > Once you have raw predictions from **ColabFold_looped**, the **Postanalysis** stage aggregates, filters, and clusters candidate structures to identify meaningful F-actin-binding SLiMs. This notebook helps evaluate each predicted motif’s structural reliability and organizes results for detailed inspection and downstream analyses (e.g., functional enrichment).
 
 <details>
