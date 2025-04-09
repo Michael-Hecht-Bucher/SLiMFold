@@ -79,7 +79,7 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
    - The filters can be modified by changing ```-E```, ```-N```, ```-F1```, ```-F2``` or ```-F3```.
    - To speed up computation parallel processing is used. Both, the number of CPU cores per search (```num_cpus_per_process```)  and the number of parallel processes (```num_processes```) can be adjusted.
    - Automatically tracks remaining peptides, so the run can resume from where it left off using the ```input_remaining.fasta``` file, in case of interruption.
-   - Running jackhmmer can take approximately 20 minutes per 6 peptides on 12 CPU threads. Depending on the number of non-redundant Hits, this step can take up to a few days.
+   - Running jackhmmer can take approximately 20 minutes per 6 peptides on 12 CPU threads. Depending on the number of non-redundant Hits, this step can take up several hours to a few days.
 
 8. **Converts the .sto to .a3m** 
    - The generated .sto files are converted to a3m files by the hhsuite reformat.pl script. The number of of parallel processes (```num_processes```) can be adjusted.
