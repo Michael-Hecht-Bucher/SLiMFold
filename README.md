@@ -92,7 +92,7 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
    - The processed files are stored in ```{project_name}/Output/MSA/sorted_a3m```
 
 10. **Trims the MSA**
-    - Takes the sorted a3m files as input and reduces the size of each file by keeping only the first Top 2048 sequences (can be modified by changing ```MAX_SEQUENCES```).
+    - Takes the sorted a3m files as input and reduces the size of each file by keeping only the first top 2048 sequences (can be modified by changing ```MAX_SEQUENCES```).
     - The processed files are stored in ```{project_name}/Output/MSA/trimmed_a3m```
 
 11. **Combines Bait and Prey MSAs for ColabFold**
