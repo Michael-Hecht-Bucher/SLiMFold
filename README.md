@@ -96,7 +96,7 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
     - The processed files are stored in ```{project_name}/Output/MSA/trimmed_a3m```
 
 11. **Combines Bait and Prey MSAs for ColabFold**
-    - Fuses the trimmed Bait.a3m with each trimmed Prey.a3m and pads them to fit the ColabFold design.  
+    - Combines the trimmed Bait.a3m with each trimmed Prey.a3m and pads them to fit the ColabFold design.  
     - The processed files are stored in ```{project_name}/Output/MSA/combined_a3m```
 
 </details>
