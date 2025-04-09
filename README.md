@@ -80,7 +80,7 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
 10. **Trims the MSA**
     - Reduces the size of each .a3m file by keeping only the first N sequences (default: 2048).
 
-11. **Combines Bait and Prey MSAs for ColabFoldA**
+11. **Combines Bait and Prey MSAs for ColabFold**
 
 </details>
 
@@ -88,31 +88,29 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
 
 ## 2. ColabFold_looped.ipynb
 
-> This notebook is a **modified version** of the [ColabFold batch pipeline](https://github.com/sokrypton/ColabFold) originally developed by the Steinegger lab. In our pipeline, **ColabFold_looped.ipynb** automates structure predictions of candidate motif–bait pairs (e.g., SLiM–actin) by:
->
-> 1. Accepting custom MSAs from the `Prerun` stage.  
-> 2. Looping through all FASTA files in a specified folder.  
-> 3. Integrating multiple sequences (SLiM + bait) for AlphaFold2 Multimer predictions.
+> This notebook is a modified version of the [ColabFold batch pipeline](https://github.com/sokrypton/ColabFold) originally developed by the Steinegger lab. In our pipeline, ColabFold_looped.ipynb automates structure predictions of candidate motif–bait pairs (e.g., SLiM–actin). The key difference from the original ColabFold batch notebook is the ability to loop through multiple FASTA files and their associated custom A3M files, while also allowing users to specify the number of seeds for increased model diversity.
 
 <details>
   <summary>Details</summary>
 
-1. **Batch Processing & Automation**  
-   - Scans a given folder (e.g., in Google Drive) for all `.fasta` files.  
-   - Automatically runs AlphaFold2 Multimer for each file–MSA pair.  
-   - No manual input required for each sequence, speeding up large-scale screening.
+1. **Preparation**  
+   - Upload the FASTA files (Output/Fasta/) and the custom MSAs (Output/combined_a3m/) you generated in Prerun.ipynb to your Google Drive.
+   - Open ColabFold_looped.ipynb in Google Colab, connect to a runtime, and select a GPU (we recommend using an A100 for faster inference).
+   - Set the paths to your uploaded:
+     -   fasta_directory (FASTA files)
+     -   msa_directory (custom A3Ms)
+     -   result_directory (where predictions will be saved)
+   - Under **msa_mode**, choose whether to use
+     -   custom – uses your **precomputed MSAs** (recommended for peptides)
+     -   MMseqs2_uniref_env – generates MSAs on the fly (often insufficient for short sequences like peptides)
 
-2. **Integration of Custom MSAs**  
-   - If `.a3m` alignment files exist from **Prerun** (stored in a designated “MSA” folder), the notebook **matches each `.a3m`** to its corresponding `.fasta` by name.  
-   - These custom MSAs help improve structure predictions by providing more specific alignments.
+2. **Running the Prediction**  
+   - Run the main prediction cell: the script will automatically loop through all FASTA files, pair them with the corresponding .a3m files, and run structure prediction for each pair.  
+   - Prediction results are saved in your defined result_directory.
+   - If the Colab runtime disconnects (e.g., after 24 hours), don't worry:
+     -   Already processed FASTA files are moved into a done folder.
+     -   Simply reconnect to the notebook and rerun the prediction cell to continue from where it left off.
 
-3. **Configurable Output**  
-   - Allows custom output folders to keep results organized.  
-   - Lets you adjust seeds and other AlphaFold2 parameters, enabling fine-tuning of your predictions.
-
-4. **AlphaFold2 Multimer Predictions**  
-   - Uses the combined sequences (motif + bait) to generate 3D models.  
-   - Logs pLDDT, pTM, and ipTM scores to measure model confidence and interface quality.
 
 </details>
 
