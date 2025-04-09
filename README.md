@@ -123,27 +123,61 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
 <details>
   <summary>Details</summary>
 
-1. **Loading & Filtering Models**  
+1. **Folder and pathway setup**
+   - Please download the results (zip files) and place them in a folder 
+   - Please define the paths where
+     - the zip files are stored (zip_files_folder)
+     - the fastas are stored (Output/Fastas)
+     - the reference_pdb_path (this is important, for RMSD and angle calculation. The pdb should be in the same format (meaning number of residues and chains, as well as reihenfolge) as your predicted structures
+     - the outputs are stored (output_directory)
+   - Automatically creates a consistent project folder structure.
+
+2. **Unpacking**
+   - Unpacks all the zip files
+
+3. **Analysis of Model Metrics and Structural Comparisons**
+   - Unpacks all the zip files
    - Reads all predicted structures and extracts:  
      - pLDDT: Per-residue confidence.  
-     - pTM & ipTM: Global and interface metrics indicating interchain confidence.  
-   - Excludes structures with ipTM < 0.6 (default), which generally indicates poor interface reliability.
+     - pTM & ipTM: Global and interface metrics indicating interchain confidence. For this value the mean of the Top 3 models are calculated. 
+   - Also calculates RMSD (Root Mean Square Deviation)(Calculates RMSD over the alpha-carbon atoms in the motif region (P1–P9)), spherical angles (φ (azimuth) and θ (polar))(Generates Δφ and Δθ values by comparing each predicted motif’s orientation to the reference.), and helix polarity by comparing the predicted models against a reference structure.
 
-2. **Structural Alignment & RMSD**  
+4. **Filter Combined Results by ipTM Cutoff**
+   - Excludes structures with ipTM < 0.6 (default), which generally indicates poor interface reliability.
+   - Creates a scatter plot, showing Mean ipTM vs. RMSD. 
+
+5. **Visualization of 2D and 3D Scatter Plots for Protein Metrics**
+   - Visualizes the relationships between three angular dimensions (Delta Angles Theta and Phi and Helix Polarity) and Mean RMSD values of the predicted Hits.
+   - The data is displayed using 2D and 3D scatter plots, with a blue-to-red colormap for the RMSD.
+
+6. **Optimizing Clustering Parameters with differenet Algorithms and Evaluating Cluster Quality**
+   - This script searches for the optimum clustering parameters of KMeans, Agglomerative and HDBScan  and evaluates cluster quality using various metrics such as silhouette score, Calinski-Harabasz score, and Davies-Bouldin score. The results are visualized to help determine the best clustering configuration. Insights from these scores can guide the selection of n cluster size, min_cluster_size and min_samples.
+
+7. **Clustering**
+   - You can choose between three clustering methods, and choose the size based on the above calcualted silhouette score, Davies-Bouldin index, and Calinski-Harabasz index:
+     - (A) Kmeans: Needs cluster size as input. Maybe you can add like one sentence to this methdod.
+     - (B) Agglomerative: Needs cluster size as input. Maybe you can add like one sentence to this methdod.
+     - (C) HDBScan: Needs minimum cluster size and minimum samples as input. Maybe you can add like one sentence to this methdod.
+   - All perform clustering using RMSD, Δφ, Δθ, and polarity as features.
+   - 2D and 3D scatter plots are created for cluster visualization and Cluster-wise metrics (PSSM Score, ipTM Score, RMSD, IUPRED and ANCHOR Score)
+
+HIER STEHEN GEBLIEBEN
+
+3. **Structural Alignment & RMSD**  
    - Aligns each candidate structure to a reference PDB (e.g., ITPKA–actin complex).  
    - Calculates RMSD over the alpha-carbon atoms in the motif region (P1–P9).  
      - RMSD quantifies how closely the predicted motif aligns to the known reference.
 
-3. **Angular Measurements**  
+4. **Angular Measurements**  
    - Computes φ (azimuth) and θ (polar) angles to represent the motif’s orientation.  
    - Calculates helix polarity to capture directionality.  
    - Generates Δφ and Δθ values by comparing each predicted motif’s orientation to the reference.
 
-4. **Clustering**  
+5. **Clustering**  
    - Performs HDBSCAN clustering using RMSD, Δφ, Δθ, and polarity as features.  
    - Chooses optimal clustering parameters (e.g., minimum cluster size, minimum samples) based on silhouette score, Davies-Bouldin index, and Calinski-Harabasz index.
 
-5. **Cluster Examination & Data Export**  
+6. **Cluster Examination & Data Export**  
    - Structures in each cluster are exported to `.pml` files for inspection in PyMOL.  
    - Corresponding sequences are compiled into FASTA files, enabling:  
      - Sequence logo generation to identify conserved positions.  
