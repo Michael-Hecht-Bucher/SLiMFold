@@ -40,12 +40,13 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
 
 <details>
   <summary>Details</summary>
-
-1. **Folder and pathway setup**  
-   - Please define the paths iupred_path, psipred_path, NCBI_protein_database, uniref90_path, reformat_path and your bait_sequence. 
-   - Automatically creates a consistent project folder structure.  
-   - Requires the user’s environment to be active (e.g. `conda activate SLiM_AF2_screen`).
-   - Move your inital aligment to the **Input Folder** and rename it to **input.fasta** (see example folder). 
+0. **Open Prerun.ipynb**
+  
+1. **Folder and pathway setup**
+   - Select the kernel 'SLiM_AF2_screen'
+   - Define the paths iupred_path, psipred_path, NCBI_protein_database, uniref90_path, reformat_path and your bait_sequence. 
+   - Execute the cell, enter a project name in the prompt. A consistent project folder structure will be automatically created.  
+   - Move your inital alignment to the **Input Folder** and rename it to **input.fasta** (see example folder). 
 
 2. **PSSM Generation with BLOSUM62**  
    - Uses user-provided SLiMs (aligned FASTA in input.fasta) and the BLOSUM62 substitution matrix.  
@@ -57,30 +58,30 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
    - (C) Removes identical sequences found to avoid running them through jackhmmer and colabfold multiple times.
    - (Optional, if not first iteration) Compare the PSSM-hits of two iterations and write the unique hits to a new FASTA file. Please ignore this cell in case you are running the first iteration.
 
-4. **Bait Fusion and Prey-Bait Preparation**
+5. **Bait Fusion and Prey-Bait Preparation**
    - The predefined bait sequence is appended to each unique hit, separated by a colon (> header as peptide:bait).
 
-5. **Split Prey-Bait pairs into individual FASTA files for ColabFold input** 
+6. **Split Prey-Bait pairs into individual FASTA files for ColabFold input** 
 
-6. **Multiple Sequence Alignment for Bait** 
+7. **Multiple Sequence Alignment for Bait** 
    - Runs jackhmmer for the bait sequence, with modified filters, against the UniRef90 database to identify homologs and generate a .sto alignment file.
 
-7. **Multiple Sequence Alignment for Peptides** 
+8. **Multiple Sequence Alignment for Peptides** 
    - Runs jackhmmer for each peptide, with modified filters, against the UniRef90 database to identify homologs and generate a .sto alignment file.
    - Uses parallel processing to speed up computation — both the number of CPU cores per search and the number of parallel processes can be adjusted by the user.
    - Automatically tracks remaining peptides, so the run can resume from where it left off using the *input_remaining.fasta* file in case of interruption.
 
-8. **Converts the .sto to .a3m** 
+9. **Converts the .sto to .a3m** 
 
-9. **Sort and Deduplicate .a3m Files Based on Sequence Identity**
+10. **Sort and Deduplicate .a3m Files Based on Sequence Identity**
    - Sorts all .a3m files by global sequence identity to the reference (first) sequence, placing the most similar sequences at the top to improve MSA quality for structure prediction.
    - For the bait MSA (bait_sequence.a3m), the user is prompted whether they want to sort it.
    - Deduplicates the bait .a3m file (based on exact sequence match) to remove redundant homologs, ensuring higher sequence diversity and enhancing co-evolutionary signal strength for better complex prediction accuracy.
 
-10. **Trims the MSA**
+11. **Trims the MSA**
     - Reduces the size of each .a3m file by keeping only the first N sequences (default: 2048).
 
-11. **Combines Bait and Prey MSAs for ColabFold**
+12. **Combines Bait and Prey MSAs for ColabFold**
 
 </details>
 
