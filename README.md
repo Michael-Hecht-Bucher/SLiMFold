@@ -62,19 +62,22 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
    - (Optional, if not first iteration): Compare the PSSM-hits of two iterations and write the unique hits to a new FASTA file. Please ignore this cell in case you are running the first iteration.
 
 4. **Bait Fusion and Prey-Bait Preparation**
-   - input: ```Hits_nonred.fasta``` generated in the previous step.
+   - Input: ```Hits_nonred.fasta``` generated in the previous step.
    - The predefined bait sequence is appended to each unique hit, separated by a colon (> header as peptide:bait).
    - Outputs a formatted FASTA-file ```{project_name}/Output/PSSM_Hits/PreyBait.fasta```
 
 5. **Split PreyBait.fasta into individual FASTA files for ColabFold input** 
-   - Outputs ....
+   - Input: ```PreyBait.fasta``` generated in the previous step.
+   - Creates for each PreyBait Sequence pair an individual FASTA file (stored in ```{project_name}/Output/Fasta/```)
 
 6. **Multiple Sequence Alignment for Bait** 
-   - Runs jackhmmer for the bait sequence, with modified filters, against the UniRef90 database to identify homologs and generate a .sto alignment file.
+   - The predefined bait sequence is run with jackhmmer (with modified filters) against the UniRef90 database to identify homologs and generates a .sto alignment file (stored in ```{project_name}/Output/MSA/sto```).
+   - The filters can be modified by changing ```-E```, ```-N```, ```-F1```, ```-F2``` or ```-F3``` 
 
 7. **Multiple Sequence Alignment for Peptides** 
-   - Runs jackhmmer for each peptide, with modified filters, against the UniRef90 database to identify homologs and generate a .sto alignment file.
-   - Uses parallel processing to speed up computation — both the number of CPU cores per search and the number of parallel processes can be adjusted by the user.
+   - Each peptide is run with jackhmmer (with modified filters) against the UniRef90 database to identify homologs and generate a .sto alignment file (stored in ```{project_name}/Output/MSA/sto```).
+   - The filters can be modified by changing ```-E```, ```-N```, ```-F1```, ```-F2``` or ```-F3``` 
+   - To speed up computation parallel processing is used. Both, the number of CPU cores per search (```num_cpus_per_process```)  and the number of parallel processes (```num_processes```) can be adjusted.
    - Automatically tracks remaining peptides, so the run can resume from where it left off using the *input_remaining.fasta* file in case of interruption.
 
 8. **Converts the .sto to .a3m** 
