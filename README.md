@@ -55,7 +55,7 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
 3. **Proteome Search**
    - (A) Defines several thresholds for subsequent motif identification (```pssm_cutoff```, ```iupred_cutoff```, ```anchor_cutoff```, secondary structure cutoffs for helix, strand, coil or unknown). Prompts to define the probable secondary structure (of the motif) involved in the interaction. Choose bewtween 'helix', 'strand', 'coil' or 'unknown'.
      
-   - (B) Scores the human proteome (or your proteome of choice) using the PSSM, as well as IUPRED, ANCHOR, PSIPRED. Retains only hits meeting specified cutoffs. Extends each hit by ±20 residues to capture potential context (can be modified by changing ```flanking_aa_size```). This will produce an output FASTA-file containing identified hits (stored in ```{project_name}/Output/PSSM_Hits/Hits.fasta```)
+   - (B) Scores the human proteome (or your proteome of choice) using the PSSM, as well as IUPRED, ANCHOR, PSIPRED. Retains only hits meeting specified cutoffs. Extends each hit by ±20 residues to capture potential context (can be modified by changing ```flanking_aa_size```). This can take up to 6 hours on 12 CPU threads. This will produce an output FASTA-file containing identified hits (stored in ```{project_name}/Output/PSSM_Hits/Hits.fasta```). 
      
    - (C) Removes identical sequences to avoid running them through jackhmmer and colabfold multiple times. This will produce another FASTA-file containing only non-redundant hits (stored in ```{project_name}/Output/PSSM_Hits/Hits_nonred.fasta```)
      
@@ -76,9 +76,10 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
 
 7. **Multiple Sequence Alignment for Prey(Peptides)** 
    - Each prey(peptide) is run with jackhmmer (with modified filters) against the UniRef90 database to identify homologs and generate a .sto alignment file (stored in ```{project_name}/Output/MSA/sto```).
-   - The filters can be modified by changing ```-E```, ```-N```, ```-F1```, ```-F2``` or ```-F3``` 
+   - The filters can be modified by changing ```-E```, ```-N```, ```-F1```, ```-F2``` or ```-F3```.
    - To speed up computation parallel processing is used. Both, the number of CPU cores per search (```num_cpus_per_process```)  and the number of parallel processes (```num_processes```) can be adjusted.
    - Automatically tracks remaining peptides, so the run can resume from where it left off using the ```input_remaining.fasta``` file in case of interruption.
+   - Running jackhmmer for each peptide can take approximately 20 minutes per 6 peptides on 12 CPU threads.
 
 8. **Converts the .sto to .a3m** 
    - The generated .sto files are converted to a3m files by the hhsuite reformat.pl script. The number of of parallel processes (```num_processes```) can be adjusted.
