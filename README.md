@@ -74,8 +74,8 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
    - The predefined bait sequence is run with jackhmmer (with modified filters) against the UniRef90 database to identify homologs and generates a .sto alignment file (stored in ```{project_name}/Output/MSA/sto```).
    - The filters can be modified by changing ```-E```, ```-N```, ```-F1```, ```-F2``` or ```-F3``` 
 
-7. **Multiple Sequence Alignment for Prey(Peptides)** 
-   - Each prey(peptide) is run with jackhmmer (with modified filters) against the UniRef90 database to identify homologs and generate a .sto alignment file (stored in ```{project_name}/Output/MSA/sto```).
+7. **Multiple Sequence Alignment for Prey** 
+   - Each prey is run with jackhmmer (with modified filters) against the UniRef90 database to identify homologs and generate a .sto alignment file (stored in ```{project_name}/Output/MSA/sto```).
    - The filters can be modified by changing ```-E```, ```-N```, ```-F1```, ```-F2``` or ```-F3```.
    - To speed up computation parallel processing is used. Both, the number of CPU cores per search (```num_cpus_per_process```)  and the number of parallel processes (```num_processes```) can be adjusted.
    - Automatically tracks remaining peptides, so the run can resume from where it left off using the ```input_remaining.fasta``` file in case of interruption.
