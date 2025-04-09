@@ -1,7 +1,7 @@
 
 # SLiMFold Pipeline
 
-The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, filter, and predict short linear motifs (SLiMs), based on an initial sequence alignment. The pipeline was run in three main steps: **Prerun**, **ColabFold_looped**, and **Postanalysis**.
+The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, filter, and predict short linear motifs (SLiMs), based on an initial sequence alignment. The pipeline is run in three main steps: **Prerun**, **ColabFold_looped**, and **Postanalysis**. Note that for very large bait proteins (> 2,950 residues), a H100 GPU might be required, which is not directly accessible within ColabFold. 
 
 ![Alt text](images/Pipeline.png)
 
@@ -40,48 +40,54 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
 
 <details>
   <summary>Details</summary>
+  
 0. **Open Prerun.ipynb**
   
 1. **Folder and pathway setup**
-   - Select the kernel 'SLiM_AF2_screen'
-   - Define the paths iupred_path, psipred_path, NCBI_protein_database, uniref90_path, reformat_path and your bait_sequence. 
+   - Select the kernel ```SLiM_AF2_screen```
+   - Define the paths ```iupred_path```, ```psipred_path```, ```NCBI_protein_database```, ```uniref90_path```, ```reformat_path``` and your ```bait_sequence```. 
    - Execute the cell, enter a project name in the prompt. A consistent project folder structure will be automatically created.  
-   - Move your inital alignment to the **Input Folder** and rename it to **input.fasta** (see example folder). 
+   - Move your initial FASTA-file to the **Input Folder** and rename it to **input.fasta**. Please make sure that input sequences contain only **the motif without flanking residues** (see example folder). Input motifs should have the same sequence length! 
 
 2. **PSSM Generation with BLOSUM62**  
-   - Uses user-provided SLiMs (aligned FASTA in input.fasta) and the BLOSUM62 substitution matrix.  
-   - Produces a PSSM cutoff (default for BLOSUM62 is set to 10).
+   - Uses input.fasta and the BLOSUM62 substitution matrix to generate an initial position-specific scoring matrix (PSSM) as CSV-file-output (stored in ```{project_name}/Output/pssm_BLOSUM62.csv```)
 
-3. **Proteome Search**  
-   - (A) Prompts the user first to define the probable secondary structure involved in the interaction. User can choose bewtween 'helix', 'strand', 'coil' or 'unknown'. 
-   - (B) Then scores the human proteome (or your organism of choice) using the PSSM, as well as IUPRED, ANCHOR, PSIPRED. Retains only hits meeting specified cutoffs for PSSM, IUPRED, ANCHOR, PSIPRED, etc. Extends each hit by ±20 residues to capture potential context.
-   - (C) Removes identical sequences found to avoid running them through jackhmmer and colabfold multiple times.
-   - (Optional, if not first iteration) Compare the PSSM-hits of two iterations and write the unique hits to a new FASTA file. Please ignore this cell in case you are running the first iteration.
+3. **Proteome Search**
+   - (A) Defines several thresholds for subsequent motif identification (```pssm_cutoff```, ```iupred_cutoff```, ```anchor_cutoff```, secondary structure cutoffs for helix, strand, coil or unknown). Prompts to define the probable secondary structure (of the motif) involved in the interaction. Choose bewtween 'helix', 'strand', 'coil' or 'unknown'.
+     
+   - (B) Scores the human proteome (or your proteome of choice) using the PSSM, as well as IUPRED, ANCHOR, PSIPRED. Retains only hits meeting specified cutoffs. Extends each hit by ±20 residues to capture potential context (can be modified by changing ```flanking_aa_size```). This will produce an output FASTA-file containing identified hits (stored in ```{project_name}/Output/PSSM_Hits/Hits.fasta```)
+     
+   - (C) Removes identical sequences to avoid running them through jackhmmer and colabfold multiple times. This will produce another FASTA-file containing only non-redundant hits (stored in ```{project_name}/Output/PSSM_Hits/Hits_nonred.fasta```)
+     
+   - (Optional, if not first iteration): Compare the PSSM-hits of two iterations and write the unique hits to a new FASTA file. Please ignore this cell in case you are running the first iteration.
 
-5. **Bait Fusion and Prey-Bait Preparation**
+4. **Bait Fusion and Prey-Bait Preparation**
+   - input: ```Hits_nonred.fasta``` generated in the previous step.
    - The predefined bait sequence is appended to each unique hit, separated by a colon (> header as peptide:bait).
+   - Outputs a formatted FASTA-file ```{project_name}/Output/PSSM_Hits/PreyBait.fasta```
 
-6. **Split Prey-Bait pairs into individual FASTA files for ColabFold input** 
+5. **Split PreyBait.fasta into individual FASTA files for ColabFold input** 
+   - Outputs ....
 
-7. **Multiple Sequence Alignment for Bait** 
+6. **Multiple Sequence Alignment for Bait** 
    - Runs jackhmmer for the bait sequence, with modified filters, against the UniRef90 database to identify homologs and generate a .sto alignment file.
 
-8. **Multiple Sequence Alignment for Peptides** 
+7. **Multiple Sequence Alignment for Peptides** 
    - Runs jackhmmer for each peptide, with modified filters, against the UniRef90 database to identify homologs and generate a .sto alignment file.
    - Uses parallel processing to speed up computation — both the number of CPU cores per search and the number of parallel processes can be adjusted by the user.
    - Automatically tracks remaining peptides, so the run can resume from where it left off using the *input_remaining.fasta* file in case of interruption.
 
-9. **Converts the .sto to .a3m** 
+8. **Converts the .sto to .a3m** 
 
-10. **Sort and Deduplicate .a3m Files Based on Sequence Identity**
+9. **Sort and Deduplicate .a3m Files Based on Sequence Identity**
    - Sorts all .a3m files by global sequence identity to the reference (first) sequence, placing the most similar sequences at the top to improve MSA quality for structure prediction.
    - For the bait MSA (bait_sequence.a3m), the user is prompted whether they want to sort it.
    - Deduplicates the bait .a3m file (based on exact sequence match) to remove redundant homologs, ensuring higher sequence diversity and enhancing co-evolutionary signal strength for better complex prediction accuracy.
 
-11. **Trims the MSA**
+10. **Trims the MSA**
     - Reduces the size of each .a3m file by keeping only the first N sequences (default: 2048).
 
-12. **Combines Bait and Prey MSAs for ColabFold**
+11. **Combines Bait and Prey MSAs for ColabFold**
 
 </details>
 
