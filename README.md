@@ -64,7 +64,7 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
 4. **Bait Fusion and Prey-Bait Preparation**
    - Input: ```Hits_nonred.fasta``` generated in the previous step.
    - The predefined bait sequence is appended to each unique hit, separated by a colon (> header as peptide:bait).
-   - Outputs a formatted FASTA-file ```{project_name}/Output/PSSM_Hits/PreyBait.fasta```
+   - Outputs a formatted FASTA-file stored in ```{project_name}/Output/PSSM_Hits/PreyBait.fasta```
 
 5. **Split PreyBait.fasta into individual FASTA files for ColabFold input** 
    - Input: ```PreyBait.fasta``` generated in the previous step.
