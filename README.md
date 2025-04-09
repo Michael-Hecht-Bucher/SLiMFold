@@ -74,18 +74,20 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
    - The predefined bait sequence is run with jackhmmer (with modified filters) against the UniRef90 database to identify homologs and generates a .sto alignment file (stored in ```{project_name}/Output/MSA/sto```).
    - The filters can be modified by changing ```-E```, ```-N```, ```-F1```, ```-F2``` or ```-F3``` 
 
-7. **Multiple Sequence Alignment for Peptides** 
-   - Each peptide is run with jackhmmer (with modified filters) against the UniRef90 database to identify homologs and generate a .sto alignment file (stored in ```{project_name}/Output/MSA/sto```).
+7. **Multiple Sequence Alignment for Prey(Peptides)** 
+   - Each prey(peptide) is run with jackhmmer (with modified filters) against the UniRef90 database to identify homologs and generate a .sto alignment file (stored in ```{project_name}/Output/MSA/sto```).
    - The filters can be modified by changing ```-E```, ```-N```, ```-F1```, ```-F2``` or ```-F3``` 
    - To speed up computation parallel processing is used. Both, the number of CPU cores per search (```num_cpus_per_process```)  and the number of parallel processes (```num_processes```) can be adjusted.
    - Automatically tracks remaining peptides, so the run can resume from where it left off using the ```input_remaining.fasta``` file in case of interruption.
 
 8. **Converts the .sto to .a3m** 
+   - The generated .sto files are converted to a3m files by the hhsuite reformat.pl script. The number of of parallel processes (```num_processes```) can be adjusted.
+   - The processed files are stored in ```{project_name}/Output/MSA/a3m```
 
 9. **Sort and Deduplicate .a3m Files Based on Sequence Identity**
-   - Sorts all .a3m files by global sequence identity to the reference (first) sequence, placing the most similar sequences at the top to improve MSA quality for structure prediction.
+   - Sorts the converted a3m files by global sequence identity to the reference sequence, placing the most similar sequences at the top to improve MSA quality for structure prediction.
    - For the bait MSA (bait_sequence.a3m), the user is prompted whether they want to sort it.
-   - Deduplicates the bait .a3m file (based on exact sequence match) to remove redundant homologs, ensuring higher sequence diversity and enhancing co-evolutionary signal strength for better complex prediction accuracy.
+   - Deduplicates the bait and prey a3m files (based on exact sequence match) to remove redundant homologs, ensuring higher sequence diversity and enhancing co-evolutionary signal strength for better complex prediction accuracy.
 
 10. **Trims the MSA**
     - Reduces the size of each .a3m file by keeping only the first N sequences (default: 2048).
