@@ -84,15 +84,19 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
    - The generated .sto files are converted to a3m files by the hhsuite reformat.pl script. The number of of parallel processes (```num_processes```) can be adjusted.
    - The processed files are stored in ```{project_name}/Output/MSA/a3m```
 
-9. **Sort and Deduplicate .a3m Files Based on Sequence Identity**
+9. **Sort and Deduplicate a3m files Based on Sequence Identity**
    - Sorts the converted a3m files by global sequence identity to the reference sequence, placing the most similar sequences at the top to improve MSA quality for structure prediction.
    - For the bait MSA (bait_sequence.a3m), the user is prompted whether they want to sort it.
    - Deduplicates the bait and prey a3m files (based on exact sequence match) to remove redundant homologs, ensuring higher sequence diversity and enhancing co-evolutionary signal strength for better complex prediction accuracy.
+   - The processed files are stored in ```{project_name}/Output/MSA/sorted_a3m```
 
 10. **Trims the MSA**
-    - Reduces the size of each .a3m file by keeping only the first N sequences (default: 2048).
+    - Takes the sorted a3m files as input and reduces the size of each file by keeping only the first Top 2048 sequences (can be modified by changing ```MAX_SEQUENCES```).
+    - The processed files are stored in ```{project_name}/Output/MSA/trimmed_a3m```
 
 11. **Combines Bait and Prey MSAs for ColabFold**
+    - Fuses the trimmed Bait.a3m with each trimmed Prey.a3m and pads them to fit the ColabFold design.  
+    - The processed files are stored in ```{project_name}/Output/MSA/combined_a3m```
 
 </details>
 
