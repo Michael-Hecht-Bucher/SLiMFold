@@ -115,7 +115,7 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
    - Open ColabFold_looped.ipynb in Google Colab, connect to a runtime, and select a GPU (we recommend using an A100 for faster inference).
    - Set the paths to your uploaded FASTA files (```fasta_directory```) and MSA files (```msa_directory```), as well as, where the predictions should be saved (```result_directory```).
    - Under **msa_mode**, choose ```custom```, which will use your **precomputed MSAs**.
-   - (Optional): Instead of choosing ```custom``` and thereby using your **precomputed MSAs**, it is also possible to choose the ```mmseqs2_uniref_env```, which will use the standard ColabFold MSA generation. Be aware, that ```mmseqs2_uniref_env``` might produce shallow MSAs for short sequences.
+   - (Optional): Instead of choosing ```custom``` and thereby using your **precomputed MSAs**, it is also possible to choose the ```mmseqs2_uniref_env```, which will use thedefault ColabFold MSA generation. Be aware, that ```mmseqs2_uniref_env``` might produce shallow MSAs for short sequences.
 
 2. **Running the Prediction**  
    - Run the main prediction cell. The script will automatically loop through all FASTA files and automatically match the corresponding MSA files.  
@@ -135,29 +135,32 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
 
 <details>
   <summary>Details</summary>
+  
+0. **Download the results**
+   - Download the results (zip files, stored in GoogleDrive ```result_directory```), and place them in the folder (```{project_name}/Output/Results/zip_files```).
 
 1. **Folder and pathway setup**
-   - Please download the results (zip files) and place them in a folder 
-   - Please define the paths where
-     - the zip files are stored (zip_files_folder)
-     - the fastas are stored (Output/Fastas)
-     - the reference_pdb_path (this is important, for RMSD and angle calculation. The pdb should be in the same format (meaning number of residues and chains, as well as reihenfolge) as your predicted structures
-     - the outputs are stored (output_directory)
-   - Automatically creates a consistent project folder structure.
+   - Inside the **Postanalysis.ipynb** define the paths, where
+     - the zip files are placed (variable ```zip_files_folder```, should be defined as ```{project_name}/Output/Results/zip_files```),
+     - the FASTA files from the 1.Prerun.ipynb were created (```{project_name}/Output/FASTA/```),
+     - the reference pdb file (```reference_pdb_path```, this is important for RMSD and angle calculation. The pdb should be in the same format as the other predicted structures (meaning number of residues and order of chains),
+     - the calculated results are stored (variable ```results_directory```, should be defined as ```{project_name}/Output/Results/```).
 
 2. **Unpacking**
    - Unpacks all the zip files
 
 3. **Analysis of Model Metrics and Structural Comparisons**
-   - Unpacks all the zip files
-   - Reads all predicted structures and extracts:  
-     - pLDDT: Per-residue confidence.  
-     - pTM & ipTM: Global and interface metrics indicating interchain confidence. For this value the mean of the Top 3 models are calculated. 
-   - Also calculates RMSD (Root Mean Square Deviation)(Calculates RMSD over the alpha-carbon atoms in the motif region (P1–P9)), spherical angles (φ (azimuth) and θ (polar))(Generates Δφ and Δθ values by comparing each predicted motif’s orientation to the reference.), and helix polarity by comparing the predicted models against a reference structure.
+   - For exact calculation the ```flanking_size``` and ```motif_size``` needs to be defined. Defaults are ```flanking_size = 20``` and ```motif_size = 9```.
+   - Reads the log files of all predicted structures and extracts ```mean pLDDT```, ```mean pTM``` and ```mean ipTM``` of the Top 3 models (The number of models for mean calculation can be adjusted with the variable ```top_n_models_metrics```). 
+   - Calculates ```RMSD``` over the alpha-carbon atoms between the reference pdb file and the best ranked model in each prediction.   
+   - Calculates spherical angles ```Δφ```, ```Δθ``` and ```helix polarity```between the reference pdb file and the best ranked model in each prediction.
+   - These calculations are saved in the CSV file ```combined_results.csv```, stored in ```{project_name}/Output/Results/```. 
 
 4. **Filter Combined Results by ipTM Cutoff**
-   - Excludes structures with ipTM < 0.6 (default), which generally indicates poor interface reliability.
-   - Creates a scatter plot, showing Mean ipTM vs. RMSD. 
+   - Takes the ```combined_results.csv``` as input and excludes Hits with ipTM > 0.6 (default), which generally indicates poor interface reliability.
+   - The ipTM cutoff can be adjusted through the variable ```iptm_cutoff```. 
+   - Creates a ```Mean ipTM vs. RMSD``` scatter plot: ```scatter_ipTM_vs_RMSD_Full.eps``` and ```scatter_ipTM_vs_RMSD_Full.tif```, stored in ```{project_name}/Output/Results/```. 
+   - Creates a CSV file ```combined_results_ipTM_Cutoff.csv```, stored in ```{project_name}/Output/Results/```. 
 
 5. **Visualization of 2D and 3D Scatter Plots for Protein Metrics**
    - Visualizes the relationships between three angular dimensions (Delta Angles Theta and Phi and Helix Polarity) and Mean RMSD values of the predicted Hits.
