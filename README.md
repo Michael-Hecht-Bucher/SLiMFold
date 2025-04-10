@@ -157,7 +157,7 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
    - These calculations are saved in the CSV file ```combined_results.csv```, stored in ```{project_name}/Output/Results/```. 
 
 4. **Filter Combined Results by ipTM Cutoff**
-   - Takes the ```combined_results.csv``` as input and excludes Hits with ipTM > 0.6 (default), which generally indicates poor interface reliability.
+   - Takes the ```combined_results.csv``` as input and excludes Hits with ```ipTM > 0.6``` (default), which generally indicates poor interface reliability.
    - The ipTM cutoff can be adjusted through the variable ```iptm_cutoff```. 
    - Creates a ```Mean ipTM vs. RMSD``` scatter plot: ```scatter_ipTM_vs_RMSD_Full.eps``` and ```scatter_ipTM_vs_RMSD_Full.tif```, stored in ```{project_name}/Output/Results/```. 
    - Creates a CSV file ```combined_results_ipTM_Cutoff.csv```, stored in ```{project_name}/Output/Results/```. 
