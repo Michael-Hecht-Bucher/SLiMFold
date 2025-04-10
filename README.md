@@ -131,7 +131,7 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
 
 ## 3. Postanalysis.ipynb
 
-> Once you have the raw predictions from **ColabFold_looped**, the **Postanalysis** stage extracts, calculates(```mean ipTM```, spherical angles (```φ```, ```θ```, ```polarity```), ```RMSD```), filters (through ```ipTM```) and clusters candidate structures to identify meaningful SLiMs. This notebook helps evaluate each predicted motif’s structural reliability and organizes results for detailed inspection and downstream analyses.
+> Once you have the raw predictions from **ColabFold_looped**, the **Postanalysis** stage extracts all relevant metadata and computes key metrics such as (```mean ipTM```, ```spherical angles``` and ```RMSD```). It then filters the results based on ```ipTM``` and clusters the candidate structures (using ```Kmeans```, ```Agglomerative``` or ```Kmeans```) to uncover meaningful SLiMs. Thereby this notebook  helps identify further motif-containing sequences.
 
 <details>
   <summary>Details</summary>
