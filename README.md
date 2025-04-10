@@ -154,7 +154,7 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
    - Reads the log files of all predicted structures and extracts ```mean pLDDT```, ```mean pTM``` and ```mean ipTM``` of the Top 3 models (The number of models for mean calculation can be adjusted with the variable ```top_n_models_metrics```). 
    - Calculates ```RMSD``` over the alpha-carbon atoms between the reference pdb file and the best ranked model in each prediction.   
    - Calculates spherical angles ```Δφ```, ```Δθ``` and ```helix polarity``` between the reference pdb file and the best ranked model in each prediction.
-   - These calculations are saved in the CSV file ```all_combined_results.csv```, stored in ```{project_name}/Output/AF2_Results/zip_files```. 
+   - These calculations are saved in the CSV file ```all_combined_results.csv```, stored in ```{project_name}/Output/AF2_Results/```. 
 
 4. **Filter Combined Results by ipTM Cutoff**
    - Takes the ```all_combined_results.csv``` as input and excludes Hits with ```ipTM > 0.6``` (default), which generally indicates poor interface reliability.
