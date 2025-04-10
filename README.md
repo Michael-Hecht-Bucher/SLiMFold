@@ -153,7 +153,7 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
    - For exact calculation the ```flanking_size``` and ```motif_size``` needs to be defined. Defaults are ```flanking_size = 20``` and ```motif_size = 9```.
    - Reads the log files of all predicted structures and extracts ```mean pLDDT```, ```mean pTM``` and ```mean ipTM``` of the Top 3 models (The number of models for mean calculation can be adjusted with the variable ```top_n_models_metrics```). 
    - Calculates ```RMSD``` over the alpha-carbon atoms between the reference pdb file and the best ranked model in each prediction.   
-   - Calculates spherical angles ```Δφ```, ```Δθ``` and ```helix polarity```between the reference pdb file and the best ranked model in each prediction.
+   - Calculates spherical angles ```Δφ```, ```Δθ``` and ```helix polarity``` between the reference pdb file and the best ranked model in each prediction.
    - These calculations are saved in the CSV file ```combined_results.csv```, stored in ```{project_name}/Output/Results/```. 
 
 4. **Filter Combined Results by ipTM Cutoff**
@@ -163,18 +163,20 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
    - Creates a CSV file ```combined_results_ipTM_Cutoff.csv```, stored in ```{project_name}/Output/Results/```. 
 
 5. **Visualization of 2D and 3D Scatter Plots for Protein Metrics**
-   - Visualizes the relationships between three angular dimensions (Delta Angles Theta and Phi and Helix Polarity) and Mean RMSD values of the predicted Hits.
-   - The data is displayed using 2D and 3D scatter plots, with a blue-to-red colormap for the RMSD.
+   - Takes the ```combined_results_ipTM_Cutoff.csv``` as input and visualizes the relationships between spherical angles ```Δφ```, ```Δθ``` and ```helix polarity``` and ```RMSD``` values of the predicted Hits.
+   - Creates a ```Δφ vs. Δθ vs. Helix Polarity vs. RMSD``` scatter plot: ```Conformations Landscape - RMSD Colouring.eps``` and ```Conformations Landscape - RMSD Colouring.tif```, stored in ```{project_name}/Output/Results/```. 
 
 6. **Optimizing Clustering Parameters with differenet Algorithms and Evaluating Cluster Quality**
-   - This script searches for the optimum clustering parameters of KMeans, Agglomerative and HDBScan  and evaluates cluster quality using various metrics such as silhouette score, Calinski-Harabasz score, and Davies-Bouldin score. The results are visualized to help determine the best clustering configuration. Insights from these scores can guide the selection of n cluster size, min_cluster_size and min_samples.
+   - Takes the ```combined_results_ipTM_Cutoff.csv``` as input and calculates the optimal parameters for several clustering methods (```KMeans```, ```Agglomerative``` and ```HDBScan```) using various metrics such as ```silhouette score```, ```Calinski-Harabasz score```, and ```Davies-Bouldin score```.
+   - The results are visualized and the best clustering configuration for each method outputted as text to help determine the best clustering configuration. Insights from these scores can guide the selection of the **cluster size** (for ```KMeans``` and ```Agglomerative```) or **minimal cluster size** and the **minimal sample size** (for ```HDBScan```).
+   - We recommend using HDBScan, as it is able to identify outliers and thereby perform a more fine-grained clustering. 
 
 7. **Clustering**
-   - You can choose between three clustering methods, and choose the size based on the above calcualted silhouette score, Davies-Bouldin index, and Calinski-Harabasz index:
-     - (A) Kmeans: Needs cluster size as input. Maybe you can add like one sentence to this methdod.
-     - (B) Agglomerative: Needs cluster size as input. Maybe you can add like one sentence to this methdod.
-     - (C) HDBScan: Needs minimum cluster size and minimum samples as input. Maybe you can add like one sentence to this methdod.
-   - All perform clustering using RMSD, Δφ, Δθ, and polarity as features.
+   - You can choose between three clustering methods, and choose the size based on the above calcualted ```silhouette score```, ```Davies-Bouldin index```, and ```Calinski-Harabasz index```:
+     - (A) **Kmeans**: The **number of cluster** must be defined in the variable ```clusters```. 
+     - (B) **Agglomerative**: **The number of cluster** must be defined in the variable ```clusters```.
+     - (C) **HDBScan**: The **minimal cluster size** and the **minimal sample size** must be defined in the variables ```min_cluster_size``` and ```min_samples```.
+   - All perform clustering using ```Δφ```, ```Δθ```, ```helix polarity``` and ```RMSD``` as features.
    - 2D and 3D scatter plots are created for cluster visualization and Cluster-wise metrics (PSSM Score, ipTM Score, RMSD, IUPRED and ANCHOR Score)
 
 HIER STEHEN GEBLIEBEN
@@ -208,7 +210,7 @@ HIER STEHEN GEBLIEBEN
 
 If you use this pipeline in published research, please cite:
 - Your own manuscript
-- Tools like AlphaFold2, ColabFold, IUPRED, ANCHOR, PSIPRED, HDBSCAN
+- Tools like AlphaFold2, ColabFold, IUPRED, ANCHOR, PSIPRED, HDBSCAN, Kmeans, Agglomerative
 
 ---
 
