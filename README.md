@@ -131,7 +131,7 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
 
 ## 3. Postanalysis.ipynb
 
-> Once you have raw predictions from **ColabFold_looped**, the **Postanalysis** stage aggregates, filters, and clusters candidate structures to identify meaningful F-actin-binding SLiMs. This notebook helps evaluate each predicted motif’s structural reliability and organizes results for detailed inspection and downstream analyses (e.g., functional enrichment).
+> Once you have the raw predictions from **ColabFold_looped**, the **Postanalysis** stage extracts, calculates(```mean ipTM```, spherical angles (```φ```, ```θ```, ```polarity```), ```RMSD```), filters (through ```ipTM```) and clusters candidate structures to identify meaningful SLiMs. This notebook helps evaluate each predicted motif’s structural reliability and organizes results for detailed inspection and downstream analyses.
 
 <details>
   <summary>Details</summary>
