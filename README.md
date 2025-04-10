@@ -14,7 +14,7 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
 1. **Clone This Repo & Create the Conda Environment**  
    ```bash
    git clone https://github.com/thp42/SLiMFold.git
-   cd SLiM_AF2_screen
+   cd SLiMFold
 
    conda env create -f SLiMFold.yml
    conda activate SLiMFold
