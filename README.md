@@ -156,7 +156,10 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
    - Calculates spherical angles ```Δφ```, ```Δθ``` and ```helix polarity``` between the reference pdb file and the best ranked model in each prediction.
    - These calculations are saved in the CSV file ```all_combined_results.csv```, stored in ```{project_name}/Output/AF2_Results/```. 
 
-![Alt text](images/Spherical.png)
+<p align="center">
+  <img src="images/Spherical.png" alt="Spherical" width="600">
+</p>
+
 
 4. **Filter Combined Results by ipTM Cutoff**
    - Takes the ```all_combined_results.csv``` as input and excludes Hits with ```ipTM > 0.6``` (default), which generally indicates poor interface reliability.
