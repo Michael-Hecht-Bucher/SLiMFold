@@ -44,7 +44,7 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
 0. **Open Prerun.ipynb**
   
 1. **Folder and pathway setup**
-   - Select the kernel ```SLiM_AF2_screen```
+   - Select the kernel ```SLiMFold```
    - Define the paths ```iupred_path```, ```psipred_path```, ```NCBI_protein_database```, ```uniref90_path```, ```reformat_path``` and your ```bait_sequence```. 
    - Execute the cell, enter a project name in the prompt. A consistent project folder structure will be automatically created.  
    - Move your initial FASTA-file to the **Input Folder** and rename it to **input.fasta**. Please make sure that input sequences contain only **the motif without flanking residues** (see example folder). Input motifs should have the same sequence length! 
