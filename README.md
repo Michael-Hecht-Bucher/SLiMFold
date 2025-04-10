@@ -113,8 +113,9 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
 1. **Preparation**  
    - Upload the **FASTA files** (stored in ```{project_name}/Output/FASTA/```) and the **custom MSAs** (stored in ```{project_name}/Output/MSA/combined_a3m```) you generated in Prerun.ipynb to your Google Drive.
    - Open ColabFold_looped.ipynb in Google Colab, connect to a runtime, and select a GPU (we recommend using an A100 for faster inference).
-   - Set the paths to your uploaded FASTA files (```fasta_directory```) and MSA directory (```msa_directory```), as well as, where the predictions should be saved (```result_directory```).
-   - Under **msa_mode**, choose **custom**, which will use your **precomputed MSAs**.
+   - Set the paths to your uploaded FASTA files (```fasta_directory```) and MSA files (```msa_directory```), as well as, where the predictions should be saved (```result_directory```).
+   - Under **msa_mode**, choose ```custom```, which will use your **precomputed MSAs**.
+   - (Optional): Instead of choosing ```custom``` and thereby using your **precomputed MSAs**, it is also possible to choose the ```mmseqs2_uniref_env```, which will use the standard ColabFold MSA generation. Be aware, that ```mmseqs2_uniref_env``` might produce shallow MSAs for short sequences.
 
 2. **Running the Prediction**  
    - Run the main prediction cell. The script will automatically loop through all FASTA files and automatically match the corresponding MSA files.  
