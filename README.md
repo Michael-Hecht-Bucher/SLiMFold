@@ -36,7 +36,7 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
 
 ## 1. Prerun.ipynb
 
-> This notebook is where the pipeline begins. It creates a position-specific scoring matrix (PSSM) from user-provided input SLiMs and searches the proteome to find candidate sequences. Key filters (PSSM score, IUPRED, ANCHOR and PSIPRED) are applied to reduce false positives, and each hit is paired with the user’s chosen “bait” (e.g., human actin). Next to FASTA files, also Multiple sequence alignments (MSAs) are generated and formatted for a compatible downstream ColabFold prediction.
+> This notebook is where the pipeline begins. It creates a position-specific scoring matrix (PSSM) from user-provided input SLiMs and searches the proteome to find candidate sequences. Key filters (```PSSM score```, ```IUPRED```, ```ANCHOR``` and ```PSIPRED```) are applied to reduce false positives, and each hit is paired with the user’s chosen “bait” (e.g., human actin). Next to FASTA files, also Multiple sequence alignments (MSAs) are generated and formatted for a compatible downstream ColabFold prediction.
 
 <details>
   <summary>Details</summary>
@@ -105,7 +105,7 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
 
 ## 2. ColabFold_looped.ipynb
 
-> This notebook is a modified version of the [ColabFold batch pipeline](https://github.com/sokrypton/ColabFold) originally developed by the Steinegger lab. In our pipeline, ColabFold_looped.ipynb automates structure predictions of candidate motif–bait pairs (e.g., SLiM–actin). The key difference from the original ColabFold batch notebook is the ability to loop through multiple FASTA files and their associated custom A3M files, while also allowing users to specify the number of seeds for increased model diversity.
+> This notebook is a modified version of the [ColabFold batch pipeline](https://github.com/sokrypton/ColabFold) originally developed by the Steinegger lab. In our pipeline, ColabFold_looped.ipynb automates structure predictions of candidate prey–bait pairs (e.g., SLiM–actin). The key difference from the original ColabFold batch notebook is the ability to loop through multiple FASTA files and their associated custom A3M files, while also allowing users to specify the number of seeds for increased model diversity.
 
 <details>
   <summary>Details</summary>
@@ -131,7 +131,7 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
 
 ## 3. Postanalysis.ipynb
 
-> Once you have the raw predictions from **ColabFold_looped**, the **Postanalysis** stage extracts all relevant metadata and computes key metrics such as (```mean ipTM```, ```spherical angles``` and ```RMSD```). It then filters the results based on ```ipTM``` and clusters the candidate structures (using ```Kmeans```, ```Agglomerative``` or ```Kmeans```) to uncover meaningful SLiMs. Thereby this notebook  helps identify further motif-containing sequences.
+> Once you have the raw predictions from ColabFold_looped, the Postanalysis stage extracts all relevant metadata and computes key metrics such as (```mean ipTM```, ```spherical angles``` and ```RMSD```). It then filters the results based on ```ipTM``` and clusters the candidate structures (using ```Kmeans```, ```Agglomerative``` or ```Kmeans```) to uncover meaningful SLiMs. Thereby this notebook  helps identify further motif-containing sequences.
 
 <details>
   <summary>Details</summary>
