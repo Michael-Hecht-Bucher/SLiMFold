@@ -144,7 +144,7 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
      - the zip files are placed (variable ```zip_files_folder```, should be defined as ```{project_name}/Output/AF2_Results/zip_files```),
      - the FASTA files from the 1.Prerun.ipynb were created (```{project_name}/Output/FASTA/```),
      - the reference pdb file (```reference_pdb_path```, which should ideally correspond to one of the sequences used in ```input.fasta```, as this pipeline aims to discover novel Hits belonigng to the same SLiM class. It is thereby important for downstream RMSD and spherical angle calculation. The reference structure must match the predicted structures in both residue count and chain order.),
-     - the calculated results are stored (variable ```results_directory```, should be defined as ```{project_name}/Output/AF2_Results/```).
+     - the calculated results are stored (variable ```results_directory```, should be defined as ```{project_name}/Output/AF2_Results/zip_file```).
 
 2. **Unpacking**
    - Unpacks all the zip files
@@ -180,13 +180,13 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
      - (B) **Agglomerative**: **The number of cluster** must be defined in the variable ```clusters```.
      - (C) **HDBScan**: The **minimal cluster size** and the **minimal sample size** must be defined in the variables ```min_cluster_size``` and ```min_samples```.
    - Creates a ```Δφ vs. Δθ vs. Helix Polarity vs. Cluster``` scatter plot: ```{clustering method} Clustering.eps``` and ```{clustering method} Clustering.tif```, stored in ```{project_name}/Output/AF2_Results/Clustering/```. 
-   - Creates a bar graph, illustrating cluster-wise metrics of ```PSSM Score```, ```ipTM Score```, ```RMSD```, ```IUPRED``` and ```ANCHOR Score```: ```Cluster-wise Metrics of {clustering method}.eps``` and ```Cluster-wise Metrics of {clustering method}.tif```, stored in ```{project_name}/Output/AF2_Results/Clustering/```. 
-   - Creates a CSV file ```all_combined_results_with_{clustering method}_clusters.csv```, stored in ```{project_name}/Output/AF2_Results/Clustering```. 
+   - Creates a bar graph, illustrating cluster-wise metrics of ```PSSM Score```, ```ipTM Score```, ```RMSD```, ```IUPRED``` and ```ANCHOR Score```: ```Cluster-wise Metrics of {clustering method}.eps``` and ```Cluster-wise Metrics of {clustering method}.tif```, stored in ```{project_name}/Output/AF2_Results/```. 
+   - Creates a CSV file ```all_combined_results_with_{clustering method}_clusters.csv```, stored in ```{project_name}/Output/AF2_Results/```. 
 
 8. **Extract and Visualize PDB Files for specific Clusters**
    - Prompts the user, to choose his clustering method (```Enter 'h' for HDBScan, 'k' for K-means, or 'a' for Agglomerative```) and his ```cluster number```.
    - It is recommended to select the cluster with ```Δφ```, ```Δθ``` and ```RMSD``` values close to 0 and a helix polarity of 1, as this indicates structural similarity to the reference PDB. Such clusters are more likely to contain sequences belonging to the same SLiM class.
-   - Takes the ```all_combined_results_with_{clustering method}_clusters.csv``` and writes a PyMOL script ```{clustering method}_{cluster_number}_structures.pml``` to load all the PDB files belonging to the prompted ```cluster number``` (stored in ```{project_name}/Output/AF2_Results/Clustering/```).
+   - Takes the ```all_combined_results_with_{clustering method}_clusters.csv``` and writes a PyMOL script ```{clustering method}_{cluster_number}_structures.pml``` to load all the PDB files belonging to the prompted ```cluster number``` (stored in ```{project_name}/Output/AF2_Results/```).
    - This enables manual visualization of all sequences within a single cluster that potentially form a distinct SLiM class.
 
 9. **Visualize and Confirm Structural Alignment in PyMOL**
@@ -201,7 +201,7 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
    - Prompts the user, to choose his clustering method (```Enter 'h' for HDBScan, 'k' for K-means, or 'a' for Agglomerative```) and his ```cluster number```.
    - Takes the ```all_combined_results_with_{clustering method}_clusters.csv``` as input and extracts the aminoacid sequence.
    - Addiotinally a description, containing ```PSSM score```, ```IUPRED Score```, ```ANCHOR score```, ```PSIPRED scores```, ```mean pLDDT```, ```mean pTM```, ```mean ipTM```, ```RMSD```, ```Δφ```, ```Δθ``` and ```helix polarity``` are included.
-   - The output ```cluster_{number}_sequences.fasta``` is stored in ```{project_name}/Output/AF2_Results/Clustering/```. 
+   - The output ```cluster_{number}_sequences.fasta``` is stored in ```{project_name}/Output/AF2_Results/```. 
 
 12. **Retrieve Gene names**
    - Define the variable ```redundant_fasta```with the path ```{project_name}/Output/PSSM_Hits/Hits.fasta/```
@@ -209,7 +209,7 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
    - Takes the ```cluster_{number}_sequences.fasta``` and ```{project_name}/Output/PSSM_Hits/Hits.fasta/``` as input and identifies through API access all the Genes containing the curated motif sequences.
    - It maps each non-redundant sequence back to its original matching redundant entries to retrieve associated protein IDs.
    - These protein IDs are queried via the NCBI Entrez API to fetch corresponding gene names.
-   - The script generates three output files in the ```{project_name}/Output/AF2_Results/Clustering/```:
+   - The script generates three output files in the ```{project_name}/Output/AF2_Results/```:
      - (A) ```annotated_sequences.fasta```: non-redundant sequences annotated with gene names in the description line
      - (B) ```sequence_gene_names.txt```: detailed mapping of each sequence ID to its associated protein IDs and gene names
      - (C) ```unique_gene_names.txt```: a list of all unique gene names found across the dataset
