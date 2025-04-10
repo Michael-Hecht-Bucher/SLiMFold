@@ -215,6 +215,7 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
      - (C) ```unique_gene_names.txt```: a list of all unique gene names found across the dataset
    - This allows downstream biological interpretation of motif-containing sequences by linking them to their gene of origin.
 
+</details>
 
 ---
 
