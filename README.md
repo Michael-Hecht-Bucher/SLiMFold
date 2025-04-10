@@ -223,8 +223,8 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
 ## Citation
 
 If you use this pipeline in published research, please cite:
-- Your own manuscript
-- Tools like AlphaFold2, ColabFold, IUPRED, ANCHOR, PSIPRED, HDBSCAN, Kmeans, Agglomerative, ....
+- [Manuscript to be inserted]
+- Tools like AlphaFold2, ColabFold, , PSSM Search, IUPRED, ANCHOR, PSIPRED, HDBSCAN, Kmeans, Agglomerative, ....
 
 ---
 
