@@ -16,12 +16,12 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
    git clone https://github.com/YourUserName/SLiM_AF2_screen.git
    cd SLiM_AF2_screen
 
-   conda env create -f slim_env.yml
-   conda activate SLiM_AF2_screen
+   conda env create -f SLiMFold.yml
+   conda activate SLiMFold
    ```
 2. **Register as Jupyter Kernel** (optional, but recommended)
    ```bash
-   python -m ipykernel install --user --name SLiM_AF2_screen --display-name "SLiM_AF2_screen"
+   python -m ipykernel install --user --name SLiMFold --display-name "SLiMFold"
    ```
 3. **Install External Tools**  
    - **PsiPred 4.0**: [psipred GitHub](https://github.com/psipred/psipred)  
