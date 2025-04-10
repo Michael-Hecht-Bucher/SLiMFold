@@ -111,19 +111,19 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
   <summary>Details</summary>
 
 1. **Preparation**  
-   - Upload the FASTA files (stored in ```{project_name}/Output/FASTA/```) and the custom MSAs (stored in ```{project_name}/Output/MSA/combined_a3m```) you generated in Prerun.ipynb to your Google Drive.
+   - Upload the **FASTA files** (stored in ```{project_name}/Output/FASTA/```) and the **custom MSAs** (stored in ```{project_name}/Output/MSA/combined_a3m```) you generated in Prerun.ipynb to your Google Drive.
    - Open ColabFold_looped.ipynb in Google Colab, connect to a runtime, and select a GPU (we recommend using an A100 for faster inference).
-   - Set the paths to your uploaded FASTA files (```fasta_directory```) and MSA directory (```msa_directory```), as well as, where the predictions will be saved (```result_directory```).
+   - Set the paths to your uploaded FASTA files (```fasta_directory```) and MSA directory (```msa_directory```), as well as, where the predictions should be saved (```result_directory```).
    - Under **msa_mode**, choose whether to use
      -   custom – uses your **precomputed MSAs** (recommended for peptides)
-     -   MMseqs2_uniref_env – generates MSAs on the fly (often insufficient for short sequences like peptides)
+     -   MMseqs2_uniref_env – generates MSAs on the fly (often insufficient for short sequences)
 
 2. **Running the Prediction**  
-   - Run the main prediction cell: the script will automatically loop through all FASTA files, pair them with the corresponding .a3m files, and run structure prediction for each pair.  
+   - Run the main prediction cell: the script will automatically loop through all FASTA files, match automatically the corresponding MSA files, and run the structure prediction.  
    - Prediction results are saved in your defined result_directory.
    - If the Colab runtime disconnects (e.g., after 24 hours), don't worry:
-     -   Already processed FASTA files are moved into a done folder.
-     -   Simply reconnect to the notebook and rerun the prediction cell to continue from where it left off.
+     -   Already processed FASTA files are moved into a ```/done``` folder.
+     -   Simply reconnect to the notebook and rerun the prediction cell, to continue from where it left off.
 
 
 </details>
