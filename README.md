@@ -141,10 +141,10 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
 
 1. **Folder and pathway setup**
    - Inside the **Postanalysis.ipynb** define the paths, where
-     - the zip files are placed (variable ```zip_files_folder```, should be defined as ```{project_name}/Output/Results/zip_files```),
+     - the zip files are placed (variable ```zip_files_folder```, should be defined as ```{project_name}/Output/AF2_Results/zip_files```),
      - the FASTA files from the 1.Prerun.ipynb were created (```{project_name}/Output/FASTA/```),
      - the reference pdb file (```reference_pdb_path```, which should ideally correspond to one of the sequences used in ```input.fasta```, as this pipeline aims to discover novel Hits belonigng to the same SLiM class. It is thereby important for downstream RMSD and spherical angle calculation. The reference structure must match the predicted structures in both residue count and chain order.),
-     - the calculated results are stored (variable ```results_directory```, should be defined as ```{project_name}/Output/Results/```).
+     - the calculated results are stored (variable ```results_directory```, should be defined as ```{project_name}/Output/AF2_Results/```).
 
 2. **Unpacking**
    - Unpacks all the zip files
