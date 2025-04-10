@@ -62,7 +62,7 @@ The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, 
    - (Optional, if not first iteration): Compare the PSSM-hits of two iterations and write the unique hits to a new FASTA file. Please ignore this cell in case you are running the first iteration.
 
 4. **Bait Fusion and Prey-Bait Preparation**
-   - Input: ```Hits_nonred.fasta``` generated in the previous step.
+   - Takes ```Hits_nonred.fasta``` as input, generated in the previous step.
    - The predefined bait sequence is appended to each unique hit, separated by a colon (> header as peptide:bait).
    - Outputs a formatted FASTA-file stored in ```{project_name}/Output/PSSM_Hits/PreyBait.fasta```
 
