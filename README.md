@@ -1,7 +1,11 @@
 
 # SLiMFold Pipeline
 
-The **SLiMFold** pipeline integrates multiple bioinformatics tools to identify, filter, and predict short linear motifs (SLiMs), based on an initial sequence alignment. The pipeline is run in three main steps: **Prerun**, **ColabFold_looped**, and **Postanalysis**. Note that for very large bait proteins (> 2,950 residues), a H100 GPU might be required, which is not directly accessible within ColabFold. 
+**Have you noticed two or more short peptide sequences that bind to the same target protein in nearly identical ways?** If so, you may have discovered a novel short linear motif (**SLiM**). SLiMs are brief amino acid segments that often mediate critical protein–protein interactions. Identifying and characterizing these motifs can be challenging, but that’s precisely where **SLiMFold** comes in. SLiMFold is a modular pipeline designed to systematically uncover, analyze, and refine potential SLiMs using a powerful combination of sequence- and structure-based bioinformatics tools. From an initial set of suspected motif-containing sequences, SLiMFold will:
+  - Generate Position-Specific Scoring Matrices (PSSMs) from your input motifs. Search Large Proteomes to find novel motif occurrences, while filtering based on predicted secondary structure, disorder, and binding regions (**Prerun.ipynb**).
+  - Perform Advanced Structural Predictions of motif-target complexes (**ColabFold_looped.ipynb**)
+  - Perform robust postanalysis to cluster, visualize, and interpret your results **Postanalysis.ipynb**.
+Whether you’re confirming a newly found SLiM or expanding your knowledge of known motifs, SLiMFold streamlines the entire process, delivering high-confidence predictions suitable for downstream experimental validation. Below you will find instructions for installing dependencies, running each notebook, and interpreting the results. If you find SLiMFold helpful in your research, please consider citing the references listed at the end of this document(*Note that for very large bait proteins (> 2,950 residues), a H100 GPU might be required, which is not directly accessible within ColabFold.*).
 
 ![Alt text](images/Pipeline.png)
 
