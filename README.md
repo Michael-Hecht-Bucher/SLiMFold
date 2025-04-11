@@ -6,7 +6,7 @@
   - Perform structural predictions of motif–target complexes using AlphaFold2 via a modified ColabFold interface (**ColabFold_looped.ipynb**)
   - Conduct robust postanalysis to extract structural metrics, visualize results, and cluster similar predictions to identify distinct motif classes (**Postanalysis.ipynb**).
 
-Whether you’re confirming a newly found SLiM or expanding your knowledge of known motifs, SLiMFold streamlines the entire process, delivering high-confidence predictions suitable for downstream experimental validation. Below you will find instructions for installing dependencies, running each notebook, and interpreting the results. (*Note that for very large bait proteins (> 2,950 residues), a H100 GPU might be required, which is not directly accessible within ColabFold.*).
+Whether you're validating a new SLiM or exploring uncharted motif landscapes, SLiMFold streamlines the process and delivers predictions ready for experimental follow-up. Below you will find instructions for installing dependencies, running each notebook, and interpreting the results. (*Note that for very large bait proteins (> 2,950 residues), a H100 GPU might be required, which is not directly accessible within ColabFold.*).
 
 ![Alt text](images/Pipeline.png)
 
