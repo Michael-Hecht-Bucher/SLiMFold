@@ -39,10 +39,16 @@ pip:
     ansible
     hdbscan v.0.8.40
 ```
+
+---
+
 ### Hardware Requirements
 
 ---
 
+
+
+---
 
 ## Installation & Environment
 
