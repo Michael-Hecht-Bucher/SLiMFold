@@ -110,7 +110,7 @@ pip:
    - Select the kernel ```SLiMFold```
    - Define the paths ```iupred_path```, ```psipred_path```, ```NCBI_protein_database```, ```uniref90_path```, ```reformat_path``` and your ```bait_sequence```. 
    - Execute the cell, enter a project name in the prompt. A consistent project folder structure will be automatically created.  
-   - Move your initial FASTA-file to the **Input Folder** and rename it to **input.fasta**. Please make sure that input sequences contain only **the motif without flanking residues** (see example folder). Input motifs should have the same sequence length! 
+   - Move your initial FASTA-file to the **Input Folder** and rename it to **input.fasta**. Please make sure that input sequences contain only **the motif without flanking residues** (see Demo folder). Input motifs should have the same sequence length! 
 
 2. **PSSM Generation with BLOSUM62**  
    - Uses input.fasta and the BLOSUM62 substitution matrix to generate an initial position-specific scoring matrix (PSSM) as CSV-file-output (stored in ```{project_name}/Output/pssm_BLOSUM62.csv```)
