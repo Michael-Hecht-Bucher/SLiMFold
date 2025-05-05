@@ -26,6 +26,7 @@ This package is supported for Linux. The package has been tested on the followin
   - Linux: Ubuntu 20.04
 
 #### **Dependencies** (see yml file)
+The typical installation time should take some minutes. 
 ```  
 python v.3.11.5
 numpy v.1.26.2
