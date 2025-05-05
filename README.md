@@ -14,6 +14,10 @@ Whether you're validating a new SLiM or exploring uncharted motif landscapes, SL
 
 ## System Requirements
 
+<details>
+
+---
+
 ### Software Requirements
 
 #### **OS Requirements**
@@ -21,7 +25,7 @@ This package is supported for Linux. The package has been tested on the followin
 
   - Linux: Ubuntu 20.04
 
-#### **Dependencies**
+#### **Dependencies** (see yml file)
 ```  
 python v.3.11.5
 numpy v.1.26.2
@@ -44,9 +48,25 @@ pip:
 
 ### Hardware Requirements
 
----
+
+#### **Recommended System**
+
+| Component | Specification | Notes |
+|-----------|---------------|-------|
+| **CPU** | ≥ 6 cores / 12 threads | Needed for MSA generation (Jackhmmer). |
+| **RAM** | ≥ 32 GB (128 GB preferred) | Handles large UniRef90 searches and parallizes the MSA generation. |
+| **GPU** | None | The required GPU for AlphaFold‑Multimer is accessed through Google Colab. |
+| **Storage** | ≥ 1 TB SSD (NVMe recommended) | Databases and intermediates benefit from fast I/O. |
 
 
+#### **Database Storage Requirements**
+
+| Database                       | Approximate Size |
+|--------------------------------|------------------|
+| UniRef90                       | ~90–100 GB       |
+| Temporary Files (MSA, logs)    | Variable (~10-50 GB per run) |
+
+</details>
 
 ---
 
