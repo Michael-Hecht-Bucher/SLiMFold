@@ -21,9 +21,24 @@ This package is supported for Linux. The package has been tested on the followin
 
   - Linux: Ubuntu 20.04
 
-#### **Python Dependencies**
-
-
+#### **Dependencies**
+```  
+python v.3.11.5
+numpy v.1.26.2
+pandas v.2.2.2
+blosum v.2.0.3
+scikit-learn v.1.5.2
+matplotlib v.3.9.2
+seaborn v.0.13.1
+hmmer v.3.4
+hhsuite v.3.3.0
+biopython
+ipykernel
+jupyterlab
+pip:
+    ansible
+    hdbscan v.0.8.40
+```
 ### Hardware Requirements
 
 ---
