@@ -12,6 +12,23 @@ Whether you're validating a new SLiM or exploring uncharted motif landscapes, SL
 
 ---
 
+## System Requirements
+
+### Software Requirements
+
+#### **OS Requirements**
+This package is supported for Linux. The package has been tested on the following systems:
+
+  - Linux: Ubuntu 20.04
+
+#### **Python Dependencies**
+
+
+### Hardware Requirements
+
+---
+
+
 ## Installation & Environment
 
 <details>
